@@ -1,3 +1,6 @@
+// ©Cyclingbob 2021. All rights reserved. This material must not be copied and redistributed under any conditions, with or without commerical gain. Exceptions only apply where exclusive permission has been granted.
+// 3rd October 2021
+// This code downloads the Schedule for the whole of the UK. This file is updated every 6 months by Network Rail.
 const fetch = require('node-fetch')
 const fs = require('fs')
 const url = require('url')
