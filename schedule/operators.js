@@ -49,5 +49,5 @@ module.exports = {
     parsed: parse(path.join(__dirname, './operators.txt')),
     parseWithSuitableNames,
     parsedWithSuitableNames: parseWithSuitableNames(path.join(__dirname, './operators.txt')),
-    write
+    write //save file
 }
