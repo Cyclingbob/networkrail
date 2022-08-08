@@ -48,5 +48,6 @@ module.exports = {
     parseFile: parse,
     parsed: parse(path.join(__dirname, './operators.txt')),
     parseWithSuitableNames,
-    parsedWithSuitableNames: parseWithSuitableNames(path.join(__dirname, './operators.txt'))
+    parsedWithSuitableNames: parseWithSuitableNames(path.join(__dirname, './operators.txt')),
+    write
 }
