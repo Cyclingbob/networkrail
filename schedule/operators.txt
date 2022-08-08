@@ -1,0 +1,86 @@
+Company Name	Business Code	Sector Code	ATOC Code	Whitelisted
+Virtual European Paths	EU	?	EU	?
+Alliance Rail	ZB	14	AR	N
+Northern Trains	ED	23	NT	Y
+Transport for Wales	HL	71	AW	Y
+c2c	HT	79	CC	Y
+Caledonian Sleeper	ES	35	CS	Y
+Chiltern Railways	HO	74	CH	Y
+CrossCountry	EH	27	XC	Y
+DC Rail	PO	34	ZZ	Y
+East Midlands Railway	EM	28	EM	Y
+Eurostar	GA	06	ES	Y
+Unmapped (was First Capital Connect)	EG	26	FC	Y
+Hull Trains	PF	55	HT	Y
+Unmapped (was Gatwick Express)	HV	81	GX	Y
+GB Railfreight	PE	54	ZZ	Y
+Govia Thameslink Railway (Great Northern)	ET	88	GN	Y
+Govia Thameslink Railway (Thameslink)	ET	88	TL	Y
+Grand Central	EC	22	GC	Y
+Grand Central (North West)	LN	14	GC[2]	Y
+Great Western Railway	EF	25	GW	Y
+Greater Anglia	EB	21	LE	Y
+Heathrow Connect	EE	24	HC	Y
+Heathrow Express	HM	86	HX	Y
+Island Lines	HZ	85	IL	Y
+Locomotive Services	LS	89	LS	N
+West Midlands Trains	EJ	29	LM	Y
+London Overground	EK	30	LO	Y
+LUL Bakerloo Line	XC	91	LT	Y
+LUL District Line - Richmond	XE	93	LT	Y
+LUL District Line - Wimbledon	XB	90	LT	Y
+Merseyrail	HE	64	ME	Y
+Network Rail (On-Track Machines)	LR	15	LR	N
+Nexus (Tyne & Wear Metro)	PG	56	TW	Y
+North Yorkshire Moors Railway	PR	51	NY	Y
+ScotRail	HA	60	SR	Y
+South Western Railway	HY	84	SW	Y
+South Yorkshire Supertram	SJ	19	SJ	Y
+Southeastern	HU	80	SE	Y
+Southern	HW	88	SN	Y
+Swanage Railway	SP	18	SP	N
+Elizabeth line	EX	33	XR	Y
+TransPennine Express	EA	20	TP	Y
+Avanti West Coast	HF	65	VT	Y
+London North Eastern Railway	HB	61	GR	Y
+West Coast Railways	PA	50	WR	Y
+JSD Rail Research & Development	RR	02	ZZ	N
+Victa Westlink Rail (defunct)	PV	03	ZZ	N
+DB Cargo Charters	FM	04	ZZ	N
+DB Cargo Freight	WA	05	ZZ	N
+Rail Operations Group	PH	07	ZZ	N
+DB Cargo International	DA	08	ZZ	N
+Freightliner Intermodal	DB	09	ZZ	N
+Serco Rail Operations	SD	10	ZZ	N
+Freightliner Heavy Haul	DH	11	ZZ	N
+Freight Europe (defunct)	PN	12	ZZ	N
+Europorte Channel	PT	13	ZZ	N
+LORAM	LC	16	ZZ	N
+Hanson & Hall Rail Services	YG	17	ZZ	N
+Network Rail Virtual Freight Company	QJ	31	ZZ	N
+Wrexham and Shropshire (defunct)	EI	32	WS	Y
+Vintage Trains	TY	36	TY	N
+Seco Rail (defunct)	RU	37	ZZ	N
+Carillion Rail CTRL (Phase 1) (defunct)	RQ	38	ZZ	N
+Harsco	RT	39	ZZ	N
+Balfour Beatty Rail	RZ	40	ZZ	N
+Unmapped		41		N
+Colas Rail	RG	42	ZZ	N
+Amey Fleet Services	RE	43	ZZ	N
+Carillion Rail	RB	44	ZZ	N
+Lumo	LD	45	LD	N
+SB (Swietelsky Babcock) Rail	RD	46	ZZ	N
+VolkerRail	RH	49	ZZ	N
+Pre Metro Operations	PK	52	ZZ	N
+SNCF Freight Services	PS	53	ZZ	N
+Unmapped		57		N
+Unmapped (was Advenza Freight)	PI	58	ZZ	N
+On Route Logistics	PM	59	ZZ	N
+SLC Operations	SO	11[3]	SO	N
+Grand Union Trains	LF	12	LF	?
+Legge Infrastructure Services	LG	72	ZZ	N
+Grand Central (North West)	LN			
+Network Rail Reserved Pathings (non-QJ)	NR	92	ZZ	N
+Ffestiniog Railway	XJ	94		Y
+Varamis Rail	MV	95		N
+Direct Rail Services	XH	97	ZZ	N
