@@ -1,0 +1,20 @@
+{
+  "name": "networkrail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "module.js",
+  "dependencies": {
+    "node-fetch": "^2.6.5",
+    "node-gzip": "^1.1.2",
+    "stompit": "^1.0.0",
+    "unzip": "^0.1.11",
+    "unzipper": "^0.10.11",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "author": "Cyclingbob",
+  "license": "ISC"
+}
