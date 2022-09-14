@@ -12,9 +12,7 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {},
-  "scripts": {
-    "preinstall": "npx npm-force-resolutions"
-  },
+  "scripts": {}
   "author": "Cyclingbob",
   "license": "ISC"
 }
