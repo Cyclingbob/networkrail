@@ -75,3 +75,6 @@ The full documentation is available [here](https://github.com/Cyclingbob/network
 - `STANOX`: These codes can refer to non station locations such as siding and junctions and they are grouped by geographical area. A single location may have multiple codes representing it. [More here](https://wiki.openraildata.com/index.php?title=STANOX_Areas "More here")
 
 - `CORPUS`: This is a database which you can use to to match location reference codes to location descriptions and other location reference codes. CORPUS can be used to search by `STANOX`, `TIPLOC`, `CRRS/3-Alpha` and [more types](https://wiki.openraildata.com/index.php?title=Reference_Data#CORPUS:_Location_Reference_Data "more types").
+
+## Copyright
+This code is protected under copyright. Unauthorised modification or redistribution is strictly prohibited. ©Cyclingbob 2022
