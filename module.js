@@ -11,7 +11,7 @@ class Client {
         this.Schedule = new Schedule(this.email, this.password);
         this.Smart = new Smart(this.email, this.password);
         this.TD = new TD(this.email, this.password);
-        this.TD_Topics: TD.topics
+        this.TD_Topics = TD.topics
     }
 }
 
