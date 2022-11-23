@@ -12,7 +12,7 @@ class Schedule {
         this.password = password
         this.types = {
             All_Daily: () => { return { type: "CIF_ALL_FULL_DAILY", day: "toc-full"}},
-            Update_Daily(day){ return { type: "CIF_ALL_UPDATE_DAILY", day: "toc-update-" + day.toLoweCase().substring(0, 3)}},
+            Update_Daily(day){ return { type: "CIF_ALL_UPDATE_DAILY", day: "toc-update-" + day.toLowerCase().substring(0, 3)}},
             TOC_Daily(toc){ return { type: `CIF_${toc.ScheduleTOCCode}_TOC_FULL_DAILY`, day: "toc-full"}},
             TOC_Update_Daily(toc, day){ return { type: `CIF_${toc.ScheduleTOCCode}_TOC_UPDATE_DAILY`, day: "toc-update-" + day.toLowerCase().substring(0, 3)}},
             Freight_Daily: () => { return { type: "CIF_ALL_FULL_DAILY", day: "toc-full"}},
