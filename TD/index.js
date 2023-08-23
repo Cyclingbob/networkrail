@@ -28,10 +28,10 @@ class Subscription {
                     data.forEach(item => {
                         var keys = Object.keys(item)
                         var object = item[keys[0]]
-                        console.log(object)
                         this.emitter.emit('movement', object)
                     })
                 }
+                this._client.ack(message)
             })
         })
         this.id = this._subscription.getId()
