@@ -48,7 +48,7 @@ TD.connect()
 TD.on('error', console.log)
 TD.on('ready', () => {
     console.log('ready')
-    var subscription = client.subscribe(client.TD_topics.All)
+    var subscription = TD.subscribe(client.TD_Topics.All)
     subscription.emitter.on('error', console.log)
     subscription.emitter.on('movement', movement => {
 		console.log(movement)
