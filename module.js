@@ -11,6 +11,6 @@ module.exports = {
         Trust: Trust_Topics,
         Schedule: Schedule_Topics,
     },
-    operators,
-    cif_codes: require('./cifcodes')
+    Operators,
+    Cif_codes: require('./cifcodes')
 }
