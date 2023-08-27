@@ -77,4 +77,4 @@ The full documentation is available [here](https://github.com/Cyclingbob/network
 - `CORPUS`: This is a database which you can use to to match location reference codes to location descriptions and other location reference codes. CORPUS can be used to search by `STANOX`, `TIPLOC`, `CRRS/3-Alpha` and [more types](https://wiki.openraildata.com/index.php?title=Reference_Data#CORPUS:_Location_Reference_Data "more types").
 
 ## Copyright
-This code is protected under copyright. Unauthorised modification or redistribution is strictly prohibited. ©Cyclingbob 2022
+The content of this repositry including documentation and code is protected under the Copyright and Patents Act 1988. Permission is granted to this content in its original form. Permission is not granted to redistribute identical or modified copies except in circumstances where it is considered fair use or permission has been granted by the creator of the content.
