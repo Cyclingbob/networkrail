@@ -33,7 +33,7 @@ class SMART {
     }
     authenticate(){
         return new Promise((resolve, reject) => {
-            https.get(`https://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=SMART`,
+            https.get(`https://publicdatafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=SMART`,
                 {
                     headers: {
                         Authorization: 'Basic ' + Buffer.from(`${this.email}:${this.password}`).toString('base64')

@@ -1,18 +1,16 @@
-const CORPUS = require('./CORPUS')
-const Schedule = require('./schedule')
-const Smart = require('./SMART')
-const TD = require('./TD')
+const TD_Topics = require('./connection/td').Topics
+const Trust_Topics = require('./connection/trust').Topics
+const Schedule_Topics = require('./schedule').Topics
+const operators = require('./schedule/operators')
+const Client = require('./client')
 
-class Client {
-    constructor(email, password){
-        this.email = email;
-        this.password = password;
-        this.Corpus = new CORPUS(this.email, this.password);
-        this.Schedule = new Schedule(this.email, this.password);
-        this.Smart = new Smart(this.email, this.password);
-        this.TD = new TD(this.email, this.password);
-        this.TD_Topics = TD.topics
-    }
+module.exports = {
+    Client,
+    Topics: {
+        TD: TD_Topics,
+        Trust: Trust_Topics,
+        Schedule: Schedule_Topics,
+    },
+    operators,
+    cif_codes: require('./cifcodes')
 }
-
-module.exports = Client

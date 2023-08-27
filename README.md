@@ -1,16 +1,16 @@
 # Network Rail
-A collection of code for accessing the Network Rail  [data feeds](https://datafeeds.networkrail.co.uk "data feeds"). This service has limited capacity so if you create an account you will be placed onto the waiting list until capacity becomes available.
+A collection of code for accessing the Network Rail  [data feeds](https://datafeeds.networkrail.co.uk "data feeds"). This service has limited capacity so if you create an account you will be placed onto the waiting list until capacity becomes available. There is a lot of platform jargon for this repository so reference the [glossary](#glossaryacronyms) if you don't understand a term
 
 ## Subscribing to the datafeeds
 You can create an account [here](https://datafeeds.networkrail.co.uk "here").
-Once you have an account, click `My Feeds` and on the left side there is a list of the available data feeds. Currently this github reposity only has written code for `TD` and `Schedule`, however no subscription is required for `SMART` or `CORPUS`
+As of January 2023 you no longer need to take any action in order to subscribe to any of the feeds.
 
 ## Accessing the datafeeds
 ### Downloading
 This collection of code is written for Node.js. You can install it [here](https://nodejs.org "here").
 
-To download the code run `npm install https://github.com/Cyclingbob/networkrail`
-This should work. I have tested it on windows. Please open an issue should this not be the case.
+To download the code run `npm install https://github.com/Cyclingbob/networkrail` or download a zip of all the files by pressing the green "code" button and then running `npm install` to download the depedencies.
+
 ### Running
 
 #### Creating your client
@@ -18,6 +18,28 @@ This should work. I have tested it on windows. Please open an issue should this 
 const networkrail = require('networkrail')
 const client = new networkrail("your datafeed email", "your data feed password")
 ```
+
+#### Connecting to the messaging feeds
+
+The datafeeds platform contains a wide range of messaging feeds including Train Describer, TRUST and VSTP (very short term plan scheduling). For all topics, refer to the [documentation](#documentation)
+
+```javascript
+const connection = client.connection //access the connection object
+connection.connect() //connect
+connection.on('ready', () => { //wait for connection to succeed
+    //td stands for train describer (TD)
+    var td = connection.subscribeTD(networkrail.Topics.TD.Anglia) //subscribe to a topic
+    td.emitter.on('message', message => { //listen for messages. These describe train movements and signalling messages
+        console.log(message)
+    })
+    td.emitter.on('error', err => { //print errors to console
+        console.error(err)
+    })
+})
+```
+You can unsubscribe from a subscription by calling `td.unsubscribe()`.
+You can disconnect the client's connection by calling `connection.disconnect()`.
+
 #### Downloading the Schedule:
 You can download the schedule to a file, or directly to memory, then read it.
 The example below shows downloading to memory:
@@ -39,25 +61,6 @@ client.Schedule.downloadToFile(type, day, path.join(__dirname, './schedule.json'
 	console.log('Downloaded')
 }).catch(console.error)
 ```
-
-#### Connecting to TD
-
-```javascript
-const TD = client.TD
-TD.connect()
-TD.on('error', console.log)
-TD.on('ready', () => {
-    console.log('ready')
-    var subscription = TD.subscribe(client.TD_Topics.All)
-    subscription.emitter.on('error', console.log)
-    subscription.emitter.on('movement', movement => {
-		console.log(movement)
-    })
-})
-```
-
-You can unsubscribe from a subscription by calling `subscription.unsubscribe()`.
-You can disconnect the TD client by calling `TD.disconnect()`.
 
 ## Documentation
 

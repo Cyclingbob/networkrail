@@ -33,7 +33,7 @@ class CORPUS {
     }
     authenticate(){
         return new Promise((resolve, reject) => {
-            https.get(`https://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS`,
+            https.get(`https://publicdatafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS`,
                 {
                     headers: {
                         Authorization: 'Basic ' + Buffer.from(`${this.email}:${this.password}`).toString('base64')
@@ -83,37 +83,47 @@ class CORPUS {
     }
     downloadAndReturnPromise(){
         return new Promise((resolve, reject) => {
-            this.downloadAndReturn(function done(parsed){
+            this.downloadAndReturn(parsed => {
                 resolve(parsed)
             })
         })
     }
-    find(name){
+    downloadAndFind(name){
         return new Promise(async (resolve, reject) => {
             var downloaded = await this.downloadAndReturnPromise().catch(reject)
             if(!downloaded) return reject('couldnt download')
             
-            var NLCDESCFound = downloaded.find(a => a.NLCDESC === name)
-            if(NLCDESCFound) return resolve(NLCDESCFound)
-
-            var NLCDESC16 = downloaded.find(a => a.NLCDESC16 === name)
-            if(NLCDESC16) return resolve(NLCDESC16)
-
-            var STANOXFound = downloaded.find(a => a.STANOX === name)
-            if(STANOXFound) return resolve(STANOXFound)
-
-            var TIPLOCFound = downloaded.find(a => a.TIPLOC === name)
-            if(TIPLOCFound) return resolve(TIPLOCFound)
-
-            var CRSFound = downloaded.find(a => a["3ALPHA"] === name)
-            if(CRSFound) return resolve(CRSFound)
-
-            var UICFound = downloaded.find(a => a.UIC === name)
-            if(UICFound) return resolve(UICFound)
-
-            var NLCFound = downloaded.find(a => a.NLC === name)
-            if(NLCFound) return resolve(NLCFound)
+            var found = this.find(name, downlaoded)
+            if(found.error) reject(found.message)
+            else resolve(found)
         })
+    }
+    find(name, cache){
+        var NLCDESCFound = cache.find(a => a.NLCDESC === name)
+        if(NLCDESCFound) return (NLCDESCFound)
+
+        var NLCDESC16 = cache.find(a => a.NLCDESC16 === name)
+        if(NLCDESC16) return (NLCDESC16)
+
+        var STANOXFound = cache.find(a => a.STANOX === name)
+        if(STANOXFound) return (STANOXFound)
+
+        var TIPLOCFound = cache.find(a => a.TIPLOC === name)
+        if(TIPLOCFound) return (TIPLOCFound)
+
+        var CRSFound = cache.find(a => a["3ALPHA"] === name)
+        if(CRSFound) return (CRSFound)
+
+        var UICFound = cache.find(a => a.UIC === name)
+        if(UICFound) return (UICFound)
+
+        var NLCFound = cache.find(a => a.NLC === name)
+        if(NLCFound) return (NLCFound)
+
+        return {
+            error: true,
+            message: "could not find specified item"
+        }
     }
 }
 

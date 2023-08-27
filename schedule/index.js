@@ -4,21 +4,19 @@ const https = require('https');
 const { ungzip } = require('node-gzip');
 const zlib = require('zlib');
 
-const operators = require('./operators')
+const Topics = {
+    All_Daily: () => { return { type: "CIF_ALL_FULL_DAILY", day: "toc-full"}},
+    Update_Daily(day){ return { type: "CIF_ALL_UPDATE_DAILY", day: "toc-update-" + day.toLowerCase().substring(0, 3)}},
+    TOC_Daily(toc){ return { type: `CIF_${toc.ScheduleTOCCode}_TOC_FULL_DAILY`, day: "toc-full"}},
+    TOC_Update_Daily(toc, day){ return { type: `CIF_${toc.ScheduleTOCCode}_TOC_UPDATE_DAILY`, day: "toc-update-" + day.toLowerCase().substring(0, 3)}},
+    Freight_Daily: () => { return { type: "CIF_ALL_FULL_DAILY", day: "toc-full"}},
+    Freight_Update_Daily(day){ return { type: "CIF_ALL_UPDATE_DAILY", day: "toc-update-" + day.toLoweCase().substring(0, 3)}},
+}
 
 class Schedule {
     constructor(email, password){
         this.email = email
         this.password = password
-        this.types = {
-            All_Daily: () => { return { type: "CIF_ALL_FULL_DAILY", day: "toc-full"}},
-            Update_Daily(day){ return { type: "CIF_ALL_UPDATE_DAILY", day: "toc-update-" + day.toLowerCase().substring(0, 3)}},
-            TOC_Daily(toc){ return { type: `CIF_${toc.ScheduleTOCCode}_TOC_FULL_DAILY`, day: "toc-full"}},
-            TOC_Update_Daily(toc, day){ return { type: `CIF_${toc.ScheduleTOCCode}_TOC_UPDATE_DAILY`, day: "toc-update-" + day.toLowerCase().substring(0, 3)}},
-            Freight_Daily: () => { return { type: "CIF_ALL_FULL_DAILY", day: "toc-full"}},
-            Freight_Update_Daily(day){ return { type: "CIF_ALL_UPDATE_DAILY", day: "toc-update-" + day.toLoweCase().substring(0, 3)}},
-        }
-        this.TOCs = operators.parsedWithSuitableNames
     }
     downloadToFile(type, day, fileName){
         return new Promise((resolve, reject) => {
@@ -32,19 +30,20 @@ class Schedule {
                     var stream = fs.createWriteStream(__dirname + '/download.gzip')
                     data.pipe(stream);
                     stream
-                        .on('finish', async () => {
-                            fs.writeFile(fileName, await ungzip(fs.readFileSync(__dirname + '/download.gzip')), function(){
-                                resolve()
-                            })
+                    .on('finish', async () => {
+                        fs.writeFile(fileName, await ungzip(fs.readFileSync(__dirname + '/download.gzip')), function(){
+                            resolve()
                         })
-                        .on('error', reject)
+                    })
+                    .on('error', reject)
                 })
             })            
         })        
     }
-    authenticate(type, day){
+    authenticate(type, day, cif){
+        if(!cif) var cif = false
         return new Promise((resolve, reject) => {
-            https.get(`https://datafeeds.networkrail.co.uk/ntrod/CifFileAuthenticate?type=${type}&day=${day}`,
+            https.get(`https://publicdatafeeds.networkrail.co.uk/ntrod/CifFileAuthenticate?type=${type}&day=${day}${cif ? ".CIF.gz" : ""}`,
                 {
                     headers: {
                         Authorization: 'Basic ' + Buffer.from(`${this.email}:${this.password}`).toString('base64')
@@ -90,18 +89,20 @@ class Schedule {
             }
         }
     }
-    downloadAndReturn(type, day, callback, endcallback){
-        this.authenticate(type, day).catch(console.log).then(headers => {
+    downloadAndReturn(type, day, callback, endcallback, error){
+        this.authenticate(type, day, false).catch(error).then(headers => {
             const { host, path } = url.parse(headers.location)
             headers['Content-Type'] = ''
             https.get({
                 host, path,
             }, async res => {
 
-                var unzip = zlib.createUnzip();
+                var unzip = zlib.createUnzip().on('error', error)
                 var buf = ''
 
-                res.pipe(unzip).on('data', d => {
+                res.pipe(unzip)
+                .on('error', error)
+                .on('data', d => {
                     buf += d.toString(); // when data is read, stash it in a string buffer
                     pump(); // then process the buffer
                 }).on('end', () => { if(endcallback) endcallback(); });
@@ -126,12 +127,33 @@ class Schedule {
                     if (line.length > 0) { // ignore empty lines
                         var obj = JSON.parse(line); // parse the JSON
                         callback(obj)
+                        // } catch(e) { error(e) }                        
                     }
                 }
                 
-            })
+            }).on('error', error)
         })
+    }
+    downloadAndReturnCIF(type, day, callback, endcallback, error){
+        this.authenticate(type, day, true).catch(error).then(headers => {
+            const { host, path } = url.parse(headers.location)
+            headers['Content-Type'] = ''
+            https.get({
+                host, path,
+            }, async res => {
+                var unzip = zlib.createUnzip().on('error', error)
+                res.pipe(unzip)
+                .on('error', error)
+                .on('data', d => {
+                    var split = d.toString().split('\n')
+                    split.forEach(item => {
+                        if(typeof callback !== "function") error("callback must be a function")
+                        else callback(item)
+                    });
+                })
+            })
+        })   
     }
 }
 
-module.exports = Schedule
+module.exports = { Schedule, Topics }
