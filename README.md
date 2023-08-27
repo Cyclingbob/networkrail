@@ -64,7 +64,7 @@ client.Schedule.downloadToFile(type, day, path.join(__dirname, './schedule.json'
 
 ## Documentation
 
-The full documentation is available [here](https://github.com/Cyclingbob/networkrail/blob/main/documentation.md "here").
+The full documentation is available [here](https://github.com/Cyclingbob/networkrail/wiki "here").
 
 ## Glossary/Acronyms
 - `TD`: Train Describer. This feed "provides low-level detail about the position of trains and their train reporting number through a network of berths" as described [here](https://wiki.openraildata.com//index.php?title=TD "here"). In short this feed allows you to track trains and their locations on a railway line.
