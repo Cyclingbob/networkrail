@@ -1,7 +1,7 @@
 const TD_Topics = require('./connection/td').Topics
 const Trust_Topics = require('./connection/trust').Topics
 const Schedule_Topics = require('./schedule').Topics
-const operators = require('./schedule/operators')
+const Operators = require('./schedule/operators')
 const Client = require('./client')
 
 module.exports = {
