@@ -4,7 +4,7 @@
   "description": "",
   "main": "module.js",
   "dependencies": {
-    "node-fetch": "^2.6.5",
+    "node-fetch": "2.6.5",
     "node-gzip": "^1.1.2",
     "stompit": "^1.0.0",
     "unzip": "^0.1.11",
