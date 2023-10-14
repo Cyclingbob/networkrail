@@ -1,7 +1,6 @@
 const fs = require('fs')
 const url = require('url')
 const https = require('https');
-const { ungzip } = require('node-gzip');
 const zlib = require('zlib');
 
 class CORPUS {
@@ -9,24 +8,19 @@ class CORPUS {
         this.email = email
         this.password = password
     }
-    downloadToFile(type, day, fileName){
+    downloadToFile(fileName){
         return new Promise((resolve, reject) => {
-            this.authenticate(type, day).catch(reject).then(headers => {
+            this.authenticate().catch(reject).then(headers => {
                 const { host, path } = url.parse(headers.location)
-                headers['Content-Type'] = ''
                 https.get({
-                    host, path,
-                    headers
-                }, async function(data){
-                    var stream = fs.createWriteStream(__dirname + '/download.gzip')
-                    data.pipe(stream);
-                    stream
-                        .on('finish', async () => {
-                            fs.writeFile(fileName, await ungzip(fs.readFileSync(__dirname + '/download.gzip')), function(){
-                                resolve()
-                            })
-                        })
-                        .on('error', reject)
+                    host, path
+                }, async function(res){
+                    var unzip = zlib.createUnzip().on('error', reject)
+                    var writeStream = fs.createWriteStream(fileName)
+
+                    res.pipe(unzip).pipe(writeStream)
+                    .on('error', reject)
+                    .on('finish', resolve)
                 })
             })
         })
