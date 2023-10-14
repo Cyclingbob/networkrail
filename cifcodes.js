@@ -189,7 +189,7 @@ var timing_load = {
                 }
             }
         }
-        if(tl === {}){
+        if(tl == {}){
             if(power_type === "EMU"){
                 tl.type = "EMU"
                 if(code === "AT") tl.unit = ["Accelerated Timings"]
