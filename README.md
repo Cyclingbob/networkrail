@@ -45,7 +45,7 @@ You can download the schedule to a file, or directly to memory, then read it.
 The example below shows downloading to memory:
 
 ```javascript
-const { type, day } = client.Schedule.types.All_Daily()
+const { type, day } = networkrail.Topics.Schedule.All_Daily()
 client.Schedule.downloadAndReturn(type, day, record => {
     if(!record.JsonScheduleV1) return
     record = record.JsonScheduleV1
@@ -56,7 +56,7 @@ client.Schedule.downloadAndReturn(type, day, record => {
 #### Downloading the schedule to file:
 ```javascript
 const path = require('path')
-var { type, day } = client.Schedule.types.All_Daily()
+const { type, day } = networkrail.Topics.Schedule.All_Daily()
 client.Schedule.downloadToFile(type, day, path.join(__dirname, './schedule.json').then(() => {
 	console.log('Downloaded')
 }).catch(console.error)
