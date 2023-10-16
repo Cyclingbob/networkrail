@@ -128,6 +128,10 @@ class Schedule {
         })
     }
     downloadAndReturnCIF(type, day, callback, endcallback, error){
+        if(typeof callback !== "function") error("callback must be a function")
+        if(typeof endcallback !== "function") error("endcallback must be a function")
+        if(typeof error !== "function") error("error callback must be a function")
+
         this.authenticate(type, day, true).catch(error).then(headers => {
             const { host, path } = url.parse(headers.location)
             headers['Content-Type'] = ''
@@ -140,13 +144,35 @@ class Schedule {
                 .on('data', d => {
                     var split = d.toString().split('\n')
                     split.forEach(item => {
-                        if(typeof callback !== "function") error("callback must be a function")
-                        else callback(item)
+                        callback(item)
                     });
-                })
+                }).on('end', endcallback)
             })
         })   
     }
+    // downloadAndReturnCIFInBulk(type, day, callback, error){ //removed because memory is too much for js to handle
+    //     if(typeof callback !== "function") error("callback must be a function")
+    //     if(typeof error !== "function") error("error callback must be a function")
+
+    //     this.authenticate(type, day, true).catch(error).then(headers => {
+    //         const { host, path } = url.parse(headers.location)
+    //         headers['Content-Type'] = ''
+    //         https.get({
+    //             host, path,
+    //         }, async res => {
+    //             var unzip = zlib.createUnzip().on('error', error)
+    //             var buf = ""
+    //             res.pipe(unzip)
+    //             .on('error', error)
+    //             .on('data', d => {
+    //                 var split = d.toString()
+    //                 console.log(split.length, buf.length)
+    //                 buf += split
+    //             })
+    //             .on('end', () => callback(buf))
+    //         })
+    //     })   
+    // }
 }
 
 module.exports = { Schedule, Topics }
