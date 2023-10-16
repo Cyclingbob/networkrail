@@ -112,6 +112,16 @@ var power_type = {
     }
 }
 
+function isEmpty(obj) {
+    for (const prop in obj) {
+      if (Object.hasOwn(obj, prop)) {
+        return false;
+      }
+    }
+  
+    return true;
+}
+
 var timing_load = {
     fromCode(code, power_type){
         var tl = {}
@@ -189,7 +199,7 @@ var timing_load = {
                 }
             }
         }
-        if(tl == {}){
+        if(isEmpty(tl)){
             if(power_type === "EMU"){
                 tl.type = "EMU"
                 if(code === "AT") tl.unit = ["Accelerated Timings"]
@@ -210,7 +220,13 @@ var timing_load = {
                     }
                 }
             }
+        } else {
+            tl = {
+                type: power_type,
+                unit: ["unknown"]
+            }
         }
+        if(tl.unit[0] === "") tl.unit = ["unknown"]
         return tl
     }
 }
@@ -500,7 +516,7 @@ var schedule_type = {
             description: "New short term plan schedule"
         },
         {
-            code: "O",
+            code: "O", //overlay
             description: "Alteration to permanent schedule"
         },
         {
