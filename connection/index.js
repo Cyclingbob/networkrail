@@ -34,19 +34,19 @@ class Connection extends EventEmitter {
         }
     }
     subscribeTD(topic){
-        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing.")
+        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing, then wait for the 'ready' event.")
         return new TD.Subscription(this._client, topic)
     }
     subscribeTrust(topic){
-        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing.")
+        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing, then wait for the 'ready' event.")
         return new Trust.Subscription(this._client, topic)
     }
     subscribeVSTP(){
-        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing.")
+        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing, then wait for the 'ready' event.")
         return new VSTP.Subscription(this._client)
     }
     subscribeRTPPM(){
-        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing.")
+        if(!this.connected) throw new Error("You need to use connection.connect() before subscribing, then wait for the 'ready' event.")
         return new RTPPM.Subscription(this._client)
     }
     connect(callback){
